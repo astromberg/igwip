@@ -47,28 +47,16 @@ def make_bucket_key(total_seconds_elapsed, abs_score_diff, time_bin_size):
 class TempEntry:
     'Contains the time, team, team score, and opponent score but does not know the outcome of the game.'
 
-    def __init__(self, total_seconds_elapsed, team, is_home, team_score, opp_score):
+    def __init__(self, total_seconds_elapsed, team, team_score, opp_score, team_with_possession):
         self.total_seconds_elapsed = total_seconds_elapsed
         self.team = team
-        self.is_home = is_home
         self.team_score = team_score
         self.opp_score = opp_score
-
-
-class Entry:
-    'Contains the time, score, opponent_score, if they were the home team, and whether or not the team won the game.'
-
-    def __init__(self, total_seconds_elapsed, is_home, score, opp_score, won, game_id):
-        self.total_seconds_elapsed = total_seconds_elapsed
-        self.is_home = is_home
-        self.score = int(score)
-        self.opp_score = int(opp_score)
-        self.won = won
-        self.game_id = game_id
-
-    def __repr__(self):
-        return self.__str__()
+        self.team_with_possession = team_with_possession
 
     def __str__(self):
-        return '[total_seconds_elapsed = {0}, home = {1}, score = {2}, opp_score = {3}, won_game = {4}, game_id = {5}]'\
-            .format(self.total_seconds_elapsed, self.is_home, self.score, self.opp_score, self.won, self.game_id)
+        return '{0} seconds; {1} team; {2} score; {3} opponent score; {4} has possession;'\
+            .format(self.total_seconds_elapsed,
+                    self.team,
+                    self.team_score,
+                    self.opp_score)

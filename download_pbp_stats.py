@@ -5,7 +5,6 @@ import requests
 base_pbp_url = 'http://stats.nba.com/stats/playbyplayv2?StartPeriod=0&EndPeriod=0&tabView=playbyplay&GameID={game_id}'
 base_summary_url = 'http://stats.nba.com/stats/boxscoresummaryv2?GameID={game_id}'
 
-list_of_all_games = ''
 
 def make_all_game_ids():
     game_ids = []
@@ -29,16 +28,16 @@ empty_game_string = ''
 with open(os.getcwd() + '/data/nba_stats/000_empty_game.json', 'r') as f:
     empty_game_string = json.dumps(json.load(f))
 
-games_downloaded = 0
+
 for game_id in make_all_game_ids():
     pbp_file_name = os.getcwd() + '/data/nba_stats/{game_id}_pbp.json'.format(game_id=game_id)
     summary_file_name = os.getcwd() + '/data/nba_stats/{game_id}_summary.json'.format(game_id=game_id)
     if os.path.isfile(pbp_file_name) and os.path.isfile(summary_file_name):
-        print 'already have'
+        print('already have')
         continue
     headers = {'user-agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'}
     r = requests.get(base_pbp_url.format(game_id=game_id), headers=headers)
-    print base_pbp_url.format(game_id=game_id)
+    print(base_pbp_url.format(game_id=game_id))
     if r.status_code != 200:
         continue
     if len(r.json()['resultSets'][0]['rowSet']) == 0:
@@ -48,6 +47,3 @@ for game_id in make_all_game_ids():
     r = requests.get(base_summary_url.format(game_id=game_id), headers=headers)
     with open(summary_file_name, 'w') as outfile:
         json.dump(r.json()['resultSets'][0], outfile)
-    games_downloaded += 1
-    # if games_downloaded > 1:
-    #     break
