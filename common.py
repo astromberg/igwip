@@ -59,4 +59,5 @@ class TempEntry:
             .format(self.total_seconds_elapsed,
                     self.team,
                     self.team_score,
-                    self.opp_score)
+                    self.opp_score,
+                    self.team_with_possession)
