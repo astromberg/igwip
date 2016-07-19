@@ -1,3 +1,4 @@
-data/nba_stats
 data/bbvalue
+data/cache/*
+data/nba_stats
 web

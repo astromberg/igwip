@@ -8,7 +8,8 @@ base_summary_url = 'http://stats.nba.com/stats/boxscoresummaryv2?GameID={game_id
 
 def make_all_game_ids():
     game_ids = []
-    for year in range(2, 15):
+    # 2002 -> 2015
+    for year in range(14, 15):
         for season_code in [2, 4]:
             # 001: Pre Season
             # 002: Regular Season
