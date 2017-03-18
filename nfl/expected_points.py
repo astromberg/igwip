@@ -8,6 +8,12 @@ for game in games:
     if drive_key == 'crntdrv':
       continue
     drive = game.data['drives'][drive_key]
+    pprint(drive)
     for play_key in drive['plays']:
-      pprint(drive['plays'][play_key])
+      # down, distance, yardline
+      # 
+      # pprint(drive['plays'][play_key])
+      if drive['plays'][play_key]['note']:
+        print drive['plays'][play_key]['note']
+      # pprint(drive['plays'][play_key])
     break 
